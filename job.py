@@ -50,3 +50,13 @@ class Job():
         print(self.value)
         print(self.comparator)
         print(self.render)
+
+    def getConfig(self):
+        deets = {}
+        deets["name"] = self.name
+        deets["url"] = self.url
+        deets["element"] = self.element
+        deets["comparator"] = self.comparator
+        deets["key"] = self.key
+        deets["value"] = self.value
+        deets["forceRender"] = self.render
