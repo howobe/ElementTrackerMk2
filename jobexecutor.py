@@ -16,8 +16,8 @@ class JobExecutor():
         return self.checkCondition(roi, job)
 
     def get(self, job):
-        return self.session.get(job.url)
         jeLog.debug("Making get request to " + job.url)
+        return self.session.get(job.url)
 
     def find(self, response, job):
         if job.render:

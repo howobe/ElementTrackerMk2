@@ -13,7 +13,7 @@ class JobHandler():
     def __init__(self, *args):
         jhLog.info("Creating job queue")
         self.queue = []
-        self.add(args)
+        self.add(*args)
 
     def __repr__(self):
         names = [str(i) for i in self.queue]
@@ -30,6 +30,7 @@ class JobHandler():
         return cls(*jobs)
 
     def add(self, *args):
+        print(args)
         names = [str(i) for i in args]
         s = ""
         if len(names) > 1:
@@ -46,7 +47,7 @@ class JobHandler():
         jhLog.info("Session started...")
         je = JobExecutor(session)
         for job in self.queue:
-            # jhLog.debug(str(job.getConfig()))
+            jhLog.debug(str(job.getConfig()))
             try:
                 completed = je.runJob(job)
             except Exception as e:
@@ -60,5 +61,5 @@ class JobHandler():
 
     def notify(self, job):
         sl = SlackNotification(os.environ["SLACK_API_TOKEN"])
-        sl.setBody(f"Job '{job.name} detected a change! Go to {job.url}!")
+        sl.setBody(f"Job '{job.name}' detected a change!\nGo to {job.url}")
         sl.send()
