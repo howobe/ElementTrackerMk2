@@ -60,3 +60,4 @@ class Job():
         deets["key"] = self.key
         deets["value"] = self.value
         deets["forceRender"] = self.render
+        return deets

@@ -30,7 +30,7 @@ class JobHandler():
         return cls(*jobs)
 
     def add(self, *args):
-        names = [i.name for i in args]
+        names = [str(i) for i in args]
         s = ""
         if len(names) > 1:
             s = "s"
@@ -46,7 +46,7 @@ class JobHandler():
         jhLog.info("Session started...")
         je = JobExecutor(session)
         for job in self.queue:
-            jhLog.debug(job.getConfig)
+            # jhLog.debug(str(job.getConfig()))
             try:
                 completed = je.runJob(job)
             except Exception as e:

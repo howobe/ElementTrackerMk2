@@ -1,5 +1,13 @@
 from job import Job
 from jobhandler import JobHandler
+import logging
+from logging import config as logconfig
+import yaml
+
+
+with open('log.yaml', 'r') as f:
+    config = yaml.safe_load(f.read())
+    logconfig.dictConfig(config)
 
 #a = Job(url="https://www.scan.co.uk/products/amd-ryzen-5-5600x-am4-zen-3-6-core-12-thread-37ghz-46ghz-turbo-35mb-cache-pcie-40-65w-cpu",
 #        element="/html/body/div[2]/div[3]/div[2]/div[1]/div[2]/div[1]/div/div/div[1]/span[1]",
