@@ -46,5 +46,6 @@ class JobExecutor():
             objoi = attrdict[job.key]
         jeLog.info("Object of interest value: " + objoi)
         if getattr(objoi, job.comparator)(job.value):
+            job.newValue = objoi
             return True
         return False

@@ -75,5 +75,5 @@ class JobHandler():
 
     def notify(self, job):
         sl = SlackNotification(os.environ["SLACK_API_TOKEN"])
-        sl.setBody(f"Job '{job.name}' detected a change!\nGo to {job.url}")
+        sl.setBody(f"Job '{job.name}' detected a change: {job.value} => {job.newValue}!\nGo to {job.url}")
         sl.send()
