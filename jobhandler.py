@@ -10,8 +10,9 @@ jhLog = logging.getLogger("jobhand")
 
 class JobHandler():
 
-    def __init__(self, *args):
+    def __init__(self, filename=None, *args):
         jhLog.info("Creating job queue")
+        self.filename = filename
         self.queue = []
         self.add(*args)
 
@@ -27,7 +28,18 @@ class JobHandler():
         with open(filename, 'r') as f:
             for job in yaml.load_all(f, Loader=yaml.FullLoader):
                 jobs.append(Job.fromDict(job))
-        return cls(*jobs)
+        return cls(filename, *jobs)
+
+    @staticmethod
+    def editYaml(jobName, key, value, filename):
+        contents = []
+        with open(filename, 'r') as f:
+            for job in yaml.load_all(f, Loader=yaml.FullLoader):
+                if job["name"] == jobName:
+                    job[key] = value
+                contents.append(job)
+        with open(filename, 'w') as f:
+            yaml.safe_dump_all(contents, f)
 
     def add(self, *args):
         print(args)
@@ -53,8 +65,10 @@ class JobHandler():
             except Exception as e:
                 print(e)
                 continue
-            if completed:
+            if completed and job.count <= 3:
                 self.notify(job)
+                job.increment()
+                self.editYaml(job.name, "count", job.count, self.filename)
         jhLog.info("Closing session...")
         session.close()
         self.queue.clear()
