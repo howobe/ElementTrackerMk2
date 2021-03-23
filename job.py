@@ -3,9 +3,11 @@ from jobexceptions import JobException, ValueNotProvided
 
 class Job():
 
+    newValue=None
+
     def __init__(self, url=None, element=None, key=None, value=None,
                  comparator="ne", forceRender=False, name="Unnamed job",
-                 count=0):
+                 count=3):
         self.name = name
         self.count = count
         self.setUrl(url)
@@ -45,7 +47,7 @@ class Job():
         self.render = boolean
 
     def increment(self):
-        self.count += 1
+        self.count -= 1
 
     def printConfig(self):
         print(self.name)
