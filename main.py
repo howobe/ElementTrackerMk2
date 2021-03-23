@@ -21,5 +21,5 @@ with open('log.yaml', 'r') as f:
 #        element="/html/body/div[2]/div[2]/div[3]/div[2]/section/div[4]/div[4]/div/ul/li[1]",
 #        value="Sorry this item is out of stock", forceRender=True, name="currys")
 
-jh = JobHandler.fromYaml("jobs.yaml")
+jh = JobHandler.fromYaml("jobs2.yaml")
 jh.run()

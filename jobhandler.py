@@ -65,7 +65,7 @@ class JobHandler():
             except Exception as e:
                 print(e)
                 continue
-            if completed and job.count <= 3:
+            if completed and job.count > 0:
                 self.notify(job)
                 job.increment()
                 self.editYaml(job.name, "count", job.count, self.filename)
