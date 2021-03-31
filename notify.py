@@ -59,8 +59,11 @@ class EmailNotification(NotifierInterface):
 class SlackNotification(NotifierInterface):
 
     def __init__(self, apiToken: str):
-        self.client = WebClient(apiToken)
-        slackLogger.info("Initiating Slack WebClient...")
+        try:
+            self.client = WebClient(apiToken)
+            slackLogger.info("Initiating Slack WebClient...")
+        except Exception as e:
+            slackLogger.exception(e)
 
     def setBody(self, message):
         self.message = message

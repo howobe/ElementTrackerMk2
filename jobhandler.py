@@ -73,6 +73,10 @@ class JobHandler():
         self.queue.clear()
 
     def notify(self, job):
-        sl = SlackNotification(os.environ["SLACK_API_TOKEN"])
+        try:
+            sl = SlackNotification(os.environ["SLACK_API_TOKEN"])
+        except KeyError as e:
+            jhLog.exception(e)
+
         sl.setBody(f"Job '{job.name}' detected a change: {job.value} => {job.newValue}!\nGo to {job.url}")
         sl.send()
