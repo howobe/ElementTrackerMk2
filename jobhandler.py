@@ -42,7 +42,6 @@ class JobHandler():
             yaml.safe_dump_all(contents, f)
 
     def add(self, *args):
-        print(args)
         names = [str(i) for i in args]
         s = ""
         if len(names) > 1:

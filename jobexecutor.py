@@ -1,6 +1,7 @@
 import logging
 jeLog = logging.getLogger('jobexec')
 
+
 class JobExecutor():
 
     def __init__(self, session):

@@ -2,6 +2,7 @@ from jobexceptions import JobException, ValueNotProvided
 
 NOTIFICATION_LIMIT = 3
 
+
 class Job():
 
     newValue=None
@@ -33,8 +34,6 @@ class Job():
         self.comparator = "__" + comparator + "__"
         self.key = key
         self.value = value
-#        if self.comparator != "__ne__" and value is None:
-#            raise ValueNotProvided(self)
 
     def checkState(self):
         if not (self.url is None and self.element is None and self.value is
