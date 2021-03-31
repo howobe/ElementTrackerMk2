@@ -1,4 +1,4 @@
-from job import Job
+from job import Job, NOTIFICATION_LIMIT
 from jobexecutor import JobExecutor
 from requests_html import HTMLSession
 import yaml
@@ -63,9 +63,9 @@ class JobHandler():
             try:
                 completed = je.runJob(job)
             except Exception as e:
-                print(e)
+                jhLog.exception(e)
                 continue
-            if completed and job.count > 0:
+            if completed and job.count < NOTIFICATION_LIMIT:
                 self.notify(job)
                 job.increment()
                 self.editYaml(job.name, "count", job.count, self.filename)

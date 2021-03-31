@@ -1,5 +1,6 @@
 from jobexceptions import JobException, ValueNotProvided
 
+NOTIFICATION_LIMIT = 3
 
 class Job():
 
@@ -7,7 +8,7 @@ class Job():
 
     def __init__(self, url=None, element=None, key=None, value=None,
                  comparator="ne", forceRender=False, name="Unnamed job",
-                 count=3):
+                 count=0):
         self.name = name
         self.count = count
         self.setUrl(url)
@@ -47,7 +48,7 @@ class Job():
         self.render = boolean
 
     def increment(self):
-        self.count -= 1
+        self.count += 1
 
     def printConfig(self):
         print(self.name)
