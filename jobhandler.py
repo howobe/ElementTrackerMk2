@@ -58,6 +58,7 @@ class JobHandler():
         jhLog.info("Session started...")
         je = JobExecutor(session)
         for job in self.queue:
+            jhLog.info(f"Starting job '{job.name}'}")
             jhLog.debug(str(job.getConfig()))
             try:
                 completed = je.runJob(job)

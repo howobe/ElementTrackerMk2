@@ -45,7 +45,7 @@ class JobExecutor():
             attrdict = roi.attrs
             jeLog.debug("Gathering attribute")
             objoi = attrdict[job.key]
-        jeLog.info("Object of interest value: " + objoi)
+        jeLog.info(f"Checking condition: {objoi} {job.comparator.strip('__')} {job.value}")
         if getattr(objoi, job.comparator)(job.value):
             job.newValue = objoi
             return True
